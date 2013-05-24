@@ -1,0 +1,40 @@
+{
+  "name": "rendr-cli",
+  "description": "A CLI for Rendr",
+  "version": "0.1.0",
+  "homepage": "https://github.com/technicolorenvy/rendr-cli",
+  "author": {
+    "name": "Joseph (Jos) Smith",
+    "email": "technicolorenvy@gmail.com",
+    "url": "@technicolorenvy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/technicolorenvy/rendr-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/technicolorenvy/rendr-cli/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/technicolorenvy/rendr-cli/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/rendr-cli",
+  "engines": {
+    "node": "> 0.6.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "dependencies": {
+    "commander": "*",
+    "progress": "*"
+  },
+  "keywords": [],
+  "preferGlobal": "true",
+    "bin": {
+      "rendr" : "./lib/rendr-cli.js"
+    }
+}

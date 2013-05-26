@@ -30,7 +30,8 @@
   },
   "dependencies": {
     "commander": "*",
-    "progress": "*"
+    "progress": "*",
+    "backbone": "*"
   },
   "keywords": [],
   "preferGlobal": "true",

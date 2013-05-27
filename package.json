@@ -31,7 +31,8 @@
   "dependencies": {
     "commander": "*",
     "progress": "*",
-    "backbone": "*"
+    "backbone": "*",
+    "walk": ">= 2.2"
   },
   "keywords": [],
   "preferGlobal": "true",

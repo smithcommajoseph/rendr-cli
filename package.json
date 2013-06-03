@@ -32,7 +32,8 @@
     "commander": "*",
     "progress": "*",
     "backbone": "*",
-    "walk": ">= 2.2"
+    "walk": ">= 2.2",
+    "js2coffee": "*"
   },
   "keywords": [],
   "preferGlobal": "true",

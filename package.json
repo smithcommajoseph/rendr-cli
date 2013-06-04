@@ -33,6 +33,7 @@
     "progress": "*",
     "backbone": "*",
     "walk": ">= 2.2",
+    "handlebars": "*",
     "js2coffee": "*"
   },
   "keywords": [],

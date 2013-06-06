@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "commander": "*",
-    "progress": "*",
+    "async": "*",
     "backbone": "*",
     "walk": ">= 2.2",
     "handlebars": "*",

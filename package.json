@@ -31,7 +31,7 @@
   "dependencies": {
     "commander": "*",
     "async": "*",
-    "backbone": "*",
+    "underscore": "*",
     "walk": ">= 2.2",
     "handlebars": "*",
     "js2coffee": "*"

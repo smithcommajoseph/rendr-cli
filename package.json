@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "commander": "*",
+    "colors": "*",
     "async": "*",
     "underscore": "*",
     "walk": ">= 2.2",

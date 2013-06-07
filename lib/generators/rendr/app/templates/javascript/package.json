@@ -1,5 +1,5 @@
 {
-  "name": "rendr-app-template",
+  "name": "<%= appName %>",
   "version": "0.1.0",
   "description": "",
   "main": "app.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/airbnb/rendr-app-template.git"
+    "url": " "
   },
   "dependencies": {
     "express": "~>3",

@@ -20,9 +20,11 @@ _(Coming soon)_
 
 Rendr CLI comes with the following generators
 
+- app
 - model
-- controller
-- scaffold
+- view
+
+Additionally you may use the controller generator, however it is the functional equivalent of the view generator
 
 Generators and may be invoked with 
 
@@ -36,7 +38,7 @@ or the alias
 _(Coming soon)_
 
 ## Contributing
-_(Coming soon)_
+If you have a bug fix or feature proposal, submit a pull request with a clear description of the change, plus tests.
 
 ## Release History
 _(Nothing yet)_

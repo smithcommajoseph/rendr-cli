@@ -1,6 +1,6 @@
 # Rendr CLI
 
-The goal of Rendr CLI is to provide the ablility to generate Rendr apps and app components quickly and effciently.
+The goal of Rendr CLI is to provide the ablility to generate Rendr apps and app components quickly and efficiently.
 
 
 ## Getting Started

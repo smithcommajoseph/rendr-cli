@@ -4,9 +4,6 @@ var BaseGenerator = require('../../lib/generators/base_generator'),
     ViewGenerator = require('../../lib/generators/rendr/view/view_generator'),
     ControllerGenerator = require('../../lib/generators/rendr/controller/controller_generator'),
     TemplateGenerator = require('../../lib/generators/rendr/template/template_generator'),
-
-
-
     should = require('should'),
 
     APP_OPTS = {
@@ -104,7 +101,7 @@ describe("generators/base_generator", function() {
 
   describe("getGeneratorOpts", function() {
     it("should return the correct opts", function() {
-      var _this = {},
+      var _thisOb = {},
           actualOpts,
           namedAliasRequired    = { 'new':      { alias: 'thing', required: true }},
           namedNoAliasRequired  = { 'noAlias':  { required: true }},
@@ -156,8 +153,8 @@ describe("generators/base_generator", function() {
           ];
 
       fixtures.forEach(function(fixture) {
-        _this.validOpts = fixture.validOpts;
-        actualOpts = BaseGenerator.prototype.getGeneratorOpts.call(_this, fixture.passedOpts);
+        _thisOb.validOpts = fixture.validOpts;
+        actualOpts = BaseGenerator.prototype.getGeneratorOpts.call(_thisOb, fixture.passedOpts);
         actualOpts.should.eql(fixture.expectedOpts);
       });
 
@@ -172,46 +169,87 @@ describe("generators/base_generator", function() {
   });
 
   describe("dirExists", function() {
-
+    it("should return the correct boolean value", function() {
+      BaseGenerator.prototype.dirExists(__dirname).should.be.ok;
+      BaseGenerator.prototype.dirExists(__dirname + '/falsey_dirname').should.not.be.ok;
+    });
   });
 
   describe("isFile", function() {
-
+    it("should return the correct boolean value", function() {
+      BaseGenerator.prototype.dirExists(__filename).should.be.ok;
+      BaseGenerator.prototype.dirExists(__dirname + '/falsey_filename').should.not.be.ok;
+    });
   });
 
-  describe("createDirectory", function() {
+  // describe("createDirectory", function() {
 
-  });
+  // });
 
   describe("compileTemplate", function() {
-
+    it("should return a compiled template", function() {
+      BaseGenerator.prototype.compileTemplate('<h1></h1>').should.be.instanceof(Object);
+    });
   });
 
   describe("generate", function() {
+    it("should execute functions in the correct order", function(done) {
+      var _thisOb = {},
+          noopNext = function(next){ next(); };
 
+      _thisOb.preGenerate = noopNext;
+      _thisOb.renderTemplates = noopNext;
+      _thisOb.postGenerate = function() { 
+        done();
+      };
+
+      BaseGenerator.prototype.generate.call(_thisOb);
+    });
   });
 
   describe("getLang", function() {
-
+    it("should return the correct lang", function() {
+      BaseGenerator.prototype.getLang({}).should.eql('javascript');
+      BaseGenerator.prototype.getLang({coffee: true}).should.eql('coffeescript');
+    });
   });
 
   describe("getTplEngine", function() {
-
+    it("should return the correct tpl engine", function() {
+      BaseGenerator.prototype.getTplEngine().should.eql('handlebars');
+    });
   });
 
   describe("getFileSuffix", function() {
+    it("should return the correct file suffix", function() {
+      var _thisOb = {};
+
+      _thisOb.lang = 'javascript';
+      BaseGenerator.prototype.getFileSuffix.call(_thisOb).should.eql('js');
+      _thisOb.lang = 'coffeescript';
+      BaseGenerator.prototype.getFileSuffix.call(_thisOb).should.eql('coffee');
+    });
 
   });
 
   describe("getTemplateSuffix", function() {
+    it("should return the correct template suffix", function() {
+      var _thisOb = {};
 
+      _thisOb.tplEngine = 'handlebars';
+      BaseGenerator.prototype.getTemplateSuffix.call(_thisOb).should.eql('hbs');
+    });
   });
 
   describe("getResourceActions", function() {
+    it("should return the correct resource actions", function() {
+      var _thisOb = {};
 
+      _thisOb.args = [];
+      BaseGenerator.prototype.getResourceActions.call(_thisOb).should.eql(['index']);
+      _thisOb.args = ['show', 'me', 'tha', 'money'];
+      BaseGenerator.prototype.getResourceActions.call(_thisOb).should.eql(_thisOb.args);
+    });
   });
-
-
-
 
 });

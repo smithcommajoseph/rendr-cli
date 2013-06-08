@@ -1,4 +1,5 @@
-# Rendr CLI
+# Rendr CLI [![Build Status](https://travis-ci.org/technicolorenvy/rendr-cli.png)](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME])
+
 
 The goal of Rendr CLI is to provide the ablility to generate Rendr apps and app components quickly and efficiently.
 

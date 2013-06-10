@@ -121,6 +121,11 @@ describe("generators/base_generator", function() {
               expectedOpts: {noAlias: 'testname'}
             },
             {
+              validOpts: [namedNoAliasRequired],
+              passedOpts: {noAlias: true},
+              expectedOpts: {noAlias: true}
+            },
+            {
               validOpts: [namedAliasNoRequired],
               passedOpts: {jeans: '501fly'},
               expectedOpts: {pants: '501fly'}

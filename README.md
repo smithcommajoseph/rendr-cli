@@ -24,6 +24,7 @@ Assuming Node and npm are present and accounted for, install the Rendr CLI with:
     -u, --url <url>                  Set a url (only evaluated when generating a model)
     -i, --idAttribute <idAttribute>  Set an idAttribute (only evaluated when generating a model)
     -a, --apiHost <apiHost>          Set an apiHost (only evaluated when generating a model)
+    --noTemplates                    Do not generate templates (only evaluated when generating a view
     n, new <name>                    Creates a new Rendr project with <name>
     g, generate <g> <name>           Generate a <model, view> with <name>
 
@@ -55,29 +56,41 @@ that are produced in the generated model.
 
 
 ### Generating Views:
-Views will automatically generate the associated controllers + templates directories/files
+Generating a view will produce multiple bare view files. One for each action (`index`, if none are specified).
 
-If you wish to add more actions to your view, beyond the default `index` action
-you may pass additional arguments to the generator like so
+Additionally, views will automatically generate the associated templates directories/files unless the `--noTemplates` option is specified
 
-For example:
+If you wish to add more actions to your view, beyond the default `index` action you may pass additional arguments to the generator like so
 
-    $ rendr generate view VIEWNAME action1 action2 action3
+For example
 
-Will generate the `action1`, `action2`, and `action3` view files in the `APPNAME/app/views/VIEWNAME` directory.
-It will also generate the corresponding controller `APPNAME/app/controllers/VIEWNAME`
-And templates for `action1`, `action2`, and `action3` in the `APPNAME/app/templates/VIEWNAME` directory.
+    rendr generate view VIEWNAME ACTION1 ACTION2 ACTION3
 
-Additionally, when called from the command-line
+Will generate the `ACTION1`, `ACTION2`, and `ACTION3` view files in the `APPNAME/app/views/VIEWNAME` directory.
+AND templates for `ACTION1`, `ACTION2`, and `ACTION3` in the `APPNAME/app/templates/VIEWNAME` directory.
 
-    rendr generate view
 
-  and
+### Controllers:
+Controller files will be generated with an entry for each action (`index`, if none are specified).
 
-    rendr generate controller
+Like views, if you wish to add more actions to your controller, beyond the default `index` action, you may pass additional arguments to the generator like so
 
-are functionaly the same, `controller` is provided as a convience
+For example
 
+    rendr generate controller CONTROLLERNAME ACTION1 ACTION2 ACTION3
+
+Will generate the `ACTION1`, `ACTION2`, and `ACTION3` controller entries in the `APPNAME/app/controllers/CONTROLLERNAME` file.
+
+### Scaffolds:
+Scaffolds will generate views and controllers, as such they follow all the same rules and optional flags
+
+For example
+
+    rendr generate scaffold SCAFFOLDNAME ACTION1 ACTION2 ACTION3
+
+Will generate the `ACTION1`, `ACTION2`, and `ACTION3` view files in the `APPNAME/app/views/SCAFFOLDNAME` directory.  
+AND templates for `ACTION1`, `ACTION2`, and `ACTION3` in the `APPNAME/app/templates/SCAFFOLDNAME` directory.  
+AND generate the `ACTION1`, `ACTION2`, and `ACTION3` controller entries in the `APPNAME/app/controllers/SCAFFOLDNAME` file.  
 
 ### File Structure
 _(Coming soon)_

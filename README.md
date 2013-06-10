@@ -29,55 +29,54 @@ Assuming Node and npm are present and accounted for, install the Rendr CLI with:
 
 
 ### Creating a Rendr App
-The 'rendr new' command creates a new Rendr application with a default directory structure
+The `rendr new` command creates a new Rendr application with a default directory structure
 and configuration relative to the directory you are executing the command from.
 
 For example:
 
     rendr new APPNAME
 
-This generates a skeletal Rendr installation in <current path>/APPNAME.
+This generates a skeletal Rendr installation in `<current path>/APPNAME`.
 
 
 ### Generating Models:
 By default, generating a model will provide you a bare-bones scaffolded model file
-containing empty values for your url and idAttrubutes keys.
+containing empty values for your `url` and `idAttrubutes` keys.
 
 For example:
 
     rendr generate model MODELNAME
 
-This generates a nearly empty model at APPNAME/app/models/MODELNAME
+This generates a nearly empty model at `APPNAME/app/models/MODELNAME`
 
-You may make the model more useful by optionally passing the '--url', '--idAttrubute',
-or '--apiHost' flags. These flagnames match exactly the resulting keys, and values,
+You may make the model more useful by optionally passing the `--url`, `--idAttrubute`,
+or `--apiHost` flags. These flagnames match exactly the resulting keys, and values,
 that are produced in the generated model.
 
 
 ### Generating Views:
 Views will automatically generate the associated controllers + templates directories/files
 
-If you wish to add more actions to your view, beyond the default 'index' action
+If you wish to add more actions to your view, beyond the default `index` action
 you may pass additional arguments to the generator like so
 
 For example:
 
     $ rendr generate view VIEWNAME action1 action2 action3
 
-Will generate the action1, action2, and action3 view files in the APPNAME/app/views/VIEWNAME
-directory.
-It will also generate the corresponding controller APPNAME/app/controllers/VIEWNAME
-And templates for action1, action2, and action3 in the APPNAME/app/templates/VIEWNAME directory.
+Will generate the `action1`, `action2`, and `action3` view files in the `APPNAME/app/views/VIEWNAME` directory.
+It will also generate the corresponding controller `APPNAME/app/controllers/VIEWNAME`
+And templates for `action1`, `action2`, and `action3` in the `APPNAME/app/templates/VIEWNAME` directory.
 
 Additionally, when called from the command-line
 
-    rendr g view
+    rendr generate view
 
   and
 
-    rendr g controller
+    rendr generate controller
 
-are functionaly the same, 'controller' is provided as a convience
+are functionaly the same, `controller` is provided as a convience
 
 
 ### File Structure

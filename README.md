@@ -15,7 +15,7 @@ Assuming Node and npm are present and accounted for, install the Rendr CLI with:
 
 ## Usage
 
-    rendr new COMMAND [options]
+    rendr COMMAND [options]
 
     Options:
 

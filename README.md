@@ -26,7 +26,7 @@ Assuming Node and npm are present and accounted for, install the Rendr CLI with:
     -a, --apiHost <apiHost>          Set an apiHost (only evaluated when generating a model)
     --noTemplates                    Do not generate templates (only evaluated when generating a view)
     n, new <name>                    Creates a new Rendr project with <name>
-    g, generate <g> <name>           Generate a <model, view> with <name>
+    g, generate <g> <name>           Generate a <model, view, controller, scaffold> with <name>
 
 
 ### Creating a Rendr App

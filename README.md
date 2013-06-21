@@ -15,18 +15,21 @@ Assuming Node and npm are present and accounted for, install the Rendr CLI with:
 
 ## Usage
 
-    rendr COMMAND [options]
+    Usage: rendr <command> [options]
 
     Options:
 
-    -h, --help                       output usage information
-    -V, --version                    output the version number
-    -u, --url <url>                  Set a url (only evaluated when generating a model)
-    -i, --idAttribute <idAttribute>  Set an idAttribute (only evaluated when generating a model)
-    -a, --apiHost <apiHost>          Set an apiHost (only evaluated when generating a model)
-    --noTemplates                    Do not generate templates (only evaluated when generating a view)
-    n, new <name>                    Creates a new Rendr project with <name>
-    g, generate <g> <name>           Generate a <model, view, controller, scaffold> with <name>
+      -h, --help                       output usage information
+      -V, --version                    output the version number
+      -u, --url <url>                  Set a url (only evaluated when generating a model)
+      -i, --idAttribute <idAttribute>  Set an idAttribute (only evaluated when generating a model)
+      -a, --apiHost <apiHost>          Set an apiHost (only evaluated when generating a model)
+      --noTemplates                    Do not generate templates (only evaluated when generating a view)
+
+    Commands:
+
+       n, new <appName>                           Creates a new Rendr project
+       g, generate <component> <name> [options]   Generate a model, view, controller, scaffold with <name>
 
 
 ### Creating a Rendr App

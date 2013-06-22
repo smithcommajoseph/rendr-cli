@@ -7,8 +7,8 @@ var BaseGenerator = require('../../lib/generators/base_generator'),
     should = require('should'),
 
     APP_OPTS = {
-      "new": 'AppName',
-      args: []
+      generate: 'new',
+      args: ['AppName']
     },
 
     MODEL_OPTS = {
@@ -36,22 +36,22 @@ describe("generators/base_generator", function() {
 
   describe("BaseGenerator.getGeneratorName", function() {
     it("should return the correct generator name", function() {
-      BaseGenerator.getGeneratorName(APP_OPTS).should.eql('app');
-      BaseGenerator.getGeneratorName(MODEL_OPTS).should.eql('model');
-      BaseGenerator.getGeneratorName(VIEW_OPTS).should.eql('view');
-      BaseGenerator.getGeneratorName(CONTROLLER_OPTS).should.eql('controller');
-      BaseGenerator.getGeneratorName(TEMPLATE_OPTS).should.eql('template');
+      BaseGenerator.getGeneratorName(APP_OPTS.generate).should.eql('app');
+      BaseGenerator.getGeneratorName(MODEL_OPTS.generate).should.eql('model');
+      BaseGenerator.getGeneratorName(VIEW_OPTS.generate).should.eql('view');
+      BaseGenerator.getGeneratorName(CONTROLLER_OPTS.generate).should.eql('controller');
+      BaseGenerator.getGeneratorName(TEMPLATE_OPTS.generate).should.eql('template');
       should.not.exist(BaseGenerator.getGeneratorName('foo'));
     });
   });
 
   describe("BaseGenerator.getGenerator", function() {
     it("should return the correct generator", function() {
-      (BaseGenerator.getGenerator(APP_OPTS) instanceof AppGenerator).should.be.ok;
-      (BaseGenerator.getGenerator(MODEL_OPTS) instanceof ModelGenerator).should.be.ok;
-      (BaseGenerator.getGenerator(VIEW_OPTS) instanceof ViewGenerator).should.be.ok;
-      (BaseGenerator.getGenerator(CONTROLLER_OPTS) instanceof ControllerGenerator).should.be.ok;
-      (BaseGenerator.getGenerator(TEMPLATE_OPTS) instanceof TemplateGenerator).should.be.ok;
+      (BaseGenerator.getGenerator(APP_OPTS.generate, APP_OPTS.args, APP_OPTS) instanceof AppGenerator).should.be.ok;
+      (BaseGenerator.getGenerator(MODEL_OPTS.generate, MODEL_OPTS.args, MODEL_OPTS) instanceof ModelGenerator).should.be.ok;
+      (BaseGenerator.getGenerator(VIEW_OPTS.generate, VIEW_OPTS.args, VIEW_OPTS) instanceof ViewGenerator).should.be.ok;
+      (BaseGenerator.getGenerator(CONTROLLER_OPTS.generate, CONTROLLER_OPTS.args, CONTROLLER_OPTS) instanceof ControllerGenerator).should.be.ok;
+      (BaseGenerator.getGenerator(TEMPLATE_OPTS.generate, TEMPLATE_OPTS.args, TEMPLATE_OPTS) instanceof TemplateGenerator).should.be.ok;
     });
   });
 
@@ -102,6 +102,8 @@ describe("generators/base_generator", function() {
   describe("getGeneratorOpts", function() {
     it("should return the correct opts", function() {
       var _thisOb = {},
+          _args,
+          _opts,
           actualOpts,
           namedAliasRequired    = { 'new':      { alias: 'thing', required: true }},
           namedNoAliasRequired  = { 'noAlias':  { required: true }},
@@ -137,33 +139,36 @@ describe("generators/base_generator", function() {
             },
             {
               validOpts: [argAliasRequired],
-              passedOpts: {args: ['wassup']},
+              passedArgs: ['wassup'],
               expectedOpts: {aliasedArg: 'wassup'}
             },
             {
               validOpts: [argNoAliasNoRequired],
-              passedOpts: {args: ['one']},
+              passedArgs: ['one'],
               expectedOpts: {aliasedArg2: undefined}
             },
             {
               validOpts: [argNoAliasNoRequired],
-              passedOpts: {args: ['one', 'two']},
+              passedArgs: ['one', 'two'],
               expectedOpts: {aliasedArg2: 'two'}
             },
             {
               validOpts: [namedAliasRequired, namedNoAliasRequired, argAliasRequired],
-              passedOpts: {"new": 'foo', noAlias: 'bar', args: ['baz']},
+              passedOpts: {"new": 'foo', noAlias: 'bar'},
+              passedArgs: ['baz'],
               expectedOpts: {thing: 'foo', noAlias: 'bar', aliasedArg: 'baz'}
             }
           ];
 
       fixtures.forEach(function(fixture) {
         _thisOb.validOpts = fixture.validOpts;
-        actualOpts = BaseGenerator.prototype.getGeneratorOpts.call(_thisOb, fixture.passedOpts);
+        _args = fixture.passedArgs || [];
+        _opts = fixture.passedOpts || {};
+        actualOpts = BaseGenerator.prototype.getGeneratorOpts.call(_thisOb, _args, _opts);
         actualOpts.should.eql(fixture.expectedOpts);
       });
 
-    })
+    });
   });
 
   describe("getGeneratorArgs", function() {

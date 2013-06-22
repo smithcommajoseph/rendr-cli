@@ -1,0 +1,11 @@
+assets:
+  minify: false
+  cdn:
+    protocol: http
+    cnames: ['localhost']
+    pathPrefix: ''
+
+api:
+  default: 
+    host: localhost:3030
+    protocol: http

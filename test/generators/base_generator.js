@@ -7,28 +7,28 @@ var BaseGenerator = require('../../lib/generators/base_generator'),
     should = require('should'),
 
     APP_OPTS = {
-      generate: 'new',
+      cmd: 'new',
       args: ['AppName']
     },
 
     MODEL_OPTS = {
-      generate: 'model',
-      args: ["ModelName"]
+      cmd: 'generate',
+      args: ["model", "ModelName"]
     },
 
     VIEW_OPTS = {
-      generate: 'view',
-      args: ["ViewName"]
+      cmd: 'generate',
+      args: ['view', "ViewName"]
     },
 
     CONTROLLER_OPTS = {
-      generate: 'controller',
-      args: ["ControllerName"]
+      cmd: 'generate',
+      args: ['controller', "ControllerName"]
     },
 
     TEMPLATE_OPTS = {
-      generate: 'template',
-      args: ["TemplateName"]
+      cmd: 'generate',
+      args: ['template', "TemplateName"]
     };
 
 
@@ -36,22 +36,22 @@ describe("generators/base_generator", function() {
 
   describe("BaseGenerator.getGeneratorName", function() {
     it("should return the correct generator name", function() {
-      BaseGenerator.getGeneratorName(APP_OPTS.generate).should.eql('app');
-      BaseGenerator.getGeneratorName(MODEL_OPTS.generate).should.eql('model');
-      BaseGenerator.getGeneratorName(VIEW_OPTS.generate).should.eql('view');
-      BaseGenerator.getGeneratorName(CONTROLLER_OPTS.generate).should.eql('controller');
-      BaseGenerator.getGeneratorName(TEMPLATE_OPTS.generate).should.eql('template');
-      should.not.exist(BaseGenerator.getGeneratorName('foo'));
+      BaseGenerator.getGeneratorName(APP_OPTS.cmd, APP_OPTS.args).should.eql('app');
+      BaseGenerator.getGeneratorName(MODEL_OPTS.cmd, MODEL_OPTS.args).should.eql('model');
+      BaseGenerator.getGeneratorName(VIEW_OPTS.cmd, VIEW_OPTS.args).should.eql('view');
+      BaseGenerator.getGeneratorName(CONTROLLER_OPTS.cmd, CONTROLLER_OPTS.args).should.eql('controller');
+      BaseGenerator.getGeneratorName(TEMPLATE_OPTS.cmd, TEMPLATE_OPTS.args).should.eql('template');
+      should.not.exist(BaseGenerator.getGeneratorName('foo', 'bar'));
     });
   });
 
   describe("BaseGenerator.getGenerator", function() {
     it("should return the correct generator", function() {
-      (BaseGenerator.getGenerator(APP_OPTS.generate, APP_OPTS.args, APP_OPTS) instanceof AppGenerator).should.be.ok;
-      (BaseGenerator.getGenerator(MODEL_OPTS.generate, MODEL_OPTS.args, MODEL_OPTS) instanceof ModelGenerator).should.be.ok;
-      (BaseGenerator.getGenerator(VIEW_OPTS.generate, VIEW_OPTS.args, VIEW_OPTS) instanceof ViewGenerator).should.be.ok;
-      (BaseGenerator.getGenerator(CONTROLLER_OPTS.generate, CONTROLLER_OPTS.args, CONTROLLER_OPTS) instanceof ControllerGenerator).should.be.ok;
-      (BaseGenerator.getGenerator(TEMPLATE_OPTS.generate, TEMPLATE_OPTS.args, TEMPLATE_OPTS) instanceof TemplateGenerator).should.be.ok;
+      (BaseGenerator.getGenerator(APP_OPTS.cmd, APP_OPTS.args, APP_OPTS) instanceof AppGenerator).should.be.ok;
+      (BaseGenerator.getGenerator(MODEL_OPTS.cmd, MODEL_OPTS.args, MODEL_OPTS) instanceof ModelGenerator).should.be.ok;
+      (BaseGenerator.getGenerator(VIEW_OPTS.cmd, VIEW_OPTS.args, VIEW_OPTS) instanceof ViewGenerator).should.be.ok;
+      (BaseGenerator.getGenerator(CONTROLLER_OPTS.cmd, CONTROLLER_OPTS.args, CONTROLLER_OPTS) instanceof ControllerGenerator).should.be.ok;
+      (BaseGenerator.getGenerator(TEMPLATE_OPTS.cmd, TEMPLATE_OPTS.args, TEMPLATE_OPTS) instanceof TemplateGenerator).should.be.ok;
     });
   });
 
@@ -115,12 +115,12 @@ describe("generators/base_generator", function() {
             {
               validOpts: [namedAliasRequired],
               passedOpts: {"new": 'testName'},
-              expectedOpts: {thing: 'testname'}
+              expectedOpts: {thing: 'testName'}
             },
             {
               validOpts: [namedNoAliasRequired],
               passedOpts: {noAlias: 'testName'},
-              expectedOpts: {noAlias: 'testname'}
+              expectedOpts: {noAlias: 'testName'}
             },
             {
               validOpts: [namedNoAliasRequired],
@@ -173,8 +173,16 @@ describe("generators/base_generator", function() {
 
   describe("getGeneratorArgs", function() {
     it("should return the correct args", function() {
-      BaseGenerator.prototype.getGeneratorArgs([]).should.eql([]);
-      BaseGenerator.prototype.getGeneratorArgs(['foo', 'bar']).should.eql(['bar']);
+      var _thisOb = {};
+
+      _thisOb.generatorName = 'app';
+      BaseGenerator.prototype.getGeneratorArgs.call(_thisOb, []).should.eql([]);
+      BaseGenerator.prototype.getGeneratorArgs.call(_thisOb, ['foo', 'bar']).should.eql(['bar']);
+
+      _thisOb.generatorName = 'notApp';
+      BaseGenerator.prototype.getGeneratorArgs.call(_thisOb, []).should.eql([]);
+      BaseGenerator.prototype.getGeneratorArgs.call(_thisOb, ['foo', 'bar']).should.eql([]);
+      BaseGenerator.prototype.getGeneratorArgs.call(_thisOb, ['foo', 'bar', 'baz']).should.eql(['baz']);
     });
   });
 
@@ -262,4 +270,40 @@ describe("generators/base_generator", function() {
     });
   });
 
+  describe("capitalize", function() {
+    it("should return a capitalized string", function() {
+      BaseGenerator.prototype.capitalize('howdy').should.eql('Howdy');
+      BaseGenerator.prototype.capitalize('heyThereFolks').should.eql('Heytherefolks');
+    });
+  });
+
+  describe("camelize", function() {
+    it("should return a camelized string", function() {
+      BaseGenerator.prototype.camelize('Hey there folks').should.eql('heyThereFolks');
+    });
+  });
+
+  describe("capCamelize", function() {
+    it("should return a capCamelized string", function() {
+      BaseGenerator.prototype.capCamelize('Hey there folks').should.eql('HeyThereFolks');
+    });
+  });
+
+  describe("dasherize", function() {
+    it("should return a dasherized string", function() {
+      BaseGenerator.prototype.dasherize('HeyThereFolks').should.eql('hey-there-folks');
+    });
+  });
+
+  describe("humanize", function() {
+    it("should return a humanized string", function() {
+      BaseGenerator.prototype.humanize('HeyThereFolks').should.eql('Hey there folks');
+    });
+  });
+
+  describe("underscore", function() {
+    it("should return an underscored string", function() {
+      BaseGenerator.prototype.underscore('HeyThereFolks').should.eql('hey_there_folks');
+    });
+  });
 });

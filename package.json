@@ -29,11 +29,12 @@
     "test": "mocha --reporter spec  ./test --recursive"
   },
   "dependencies": {
-    "commander": "*",
+    "commander": "1.2.x",
     "colors": "*",
     "async": "*",
-    "underscore": "*",
+    "underscore": "1.4.x",
     "walk": ">= 2.2",
+    "string": "1.4.x",
     "js2coffee": "*"
   },
   "devDependencies": {

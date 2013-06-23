@@ -21,15 +21,17 @@ Assuming Node and npm are present and accounted for, install the Rendr CLI with:
 
       -h, --help                       output usage information
       -V, --version                    output the version number
-      -u, --url <url>                  Set a url (only evaluated when generating a model)
-      -i, --idAttribute <idAttribute>  Set an idAttribute (only evaluated when generating a model)
-      -a, --apiHost <apiHost>          Set an apiHost (only evaluated when generating a model)
-      --noTemplates                    Do not generate templates (only evaluated when generating a view)
+      -u, --url <url>                  Set a url (evaluated when generating a model or collection)
+      -a, --apiHost <apiHost>          Set an apiHost (evaluated when generating a model or collection)
+      -i, --idAttribute <idAttribute>  Set an idAttribute (evaluated when generating a model)
+      --addCollection                  Will generate the corresponding collection (evaluated when generating a model
+      --noTemplates                    Do not generate templates (evaluated when generating a view)
 
     Commands:
 
-       n, new <appName>                           Creates a new Rendr project
-       g, generate <component> <name> [options]   Generate a model, view, controller, scaffold with <name>
+       n, new <appName>                               Creates a new Rendr project
+       g, generate <component> <name> [options]       Generate a model/view/controller/scaffold with <name>
+       g, generate collection <modelName> [options]   Generate a collection with <modelName>
 
 
 ### Creating a Rendr App
@@ -44,8 +46,7 @@ This generates a skeletal Rendr installation in `<current path>/APPNAME`.
 
 
 ### Generating Models:
-By default, generating a model will provide you a bare-bones scaffolded model file
-containing empty values for your `url` and `idAttrubutes` keys.
+By default, generating a model will provide you a bare-bones scaffolded model file.
 
 For example:
 
@@ -53,9 +54,21 @@ For example:
 
 This generates a nearly empty model at `APPNAME/app/models/MODELNAME`
 
-You may make the model more useful by optionally passing the `--url`, `--idAttrubute`,
-or `--apiHost` flags. These flagnames match exactly the resulting keys, and values,
+You may make the model more useful by optionally setting the `--url`, `--idAttrubute`,
+or `--apiHost` options. These flagnames match exactly the resulting keys, and values,
 that are produced in the generated model.
+
+Additionally, you may also pass the `--addCollection` option which will generate a corresponding collection for your model.
+
+
+### Generating Collections
+When generating a collection, like the model generator, pass the model name that you wish to associate the collection with.
+
+For example:
+
+    rendr generate collection MODELNAME
+
+You may make the collection more useful by optionally setting the `--url`, or `--apiHost` options. These flagnames match exactly the resulting keys, and values, that are produced in the generated collection.
 
 
 ### Generating Views:

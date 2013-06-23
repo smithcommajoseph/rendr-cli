@@ -306,4 +306,12 @@ describe("generators/base_generator", function() {
       BaseGenerator.prototype.underscore('HeyThereFolks').should.eql('hey_there_folks');
     });
   });
+
+  describe("pluralize", function() {
+    it("should return an pluralized string", function() {
+      BaseGenerator.prototype.pluralize('cat').should.eql('cats');
+      BaseGenerator.prototype.pluralize('person').should.eql('people');
+    });
+  });
+
 });

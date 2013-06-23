@@ -35,6 +35,7 @@
     "underscore": "1.4.x",
     "walk": ">= 2.2",
     "string": "1.4.x",
+    "i": "0.3.x",
     "js2coffee": "*"
   },
   "devDependencies": {

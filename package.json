@@ -1,7 +1,7 @@
 {
   "name": "rendr-cli",
   "description": "A CLI for Rendr",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "homepage": "https://github.com/technicolorenvy/rendr-cli",
   "author": {
     "name": "Joseph (Jos) Smith",

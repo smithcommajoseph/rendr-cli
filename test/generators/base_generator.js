@@ -1,9 +1,9 @@
 var BaseGenerator = require('../../lib/generators/base_generator'),
-    AppGenerator = require('../../lib/generators/rendr/app/app_generator'),
-    ModelGenerator = require('../../lib/generators/rendr/model/model_generator'),
-    ViewGenerator = require('../../lib/generators/rendr/view/view_generator'),
-    ControllerGenerator = require('../../lib/generators/rendr/controller/controller_generator'),
-    TemplateGenerator = require('../../lib/generators/rendr/template/template_generator'),
+    AppGenerator = require('../../lib/generators/app/app_generator'),
+    ModelGenerator = require('../../lib/generators/model/model_generator'),
+    ViewGenerator = require('../../lib/generators/view/view_generator'),
+    ControllerGenerator = require('../../lib/generators/controller/controller_generator'),
+    TemplateGenerator = require('../../lib/generators/template/template_generator'),
     should = require('should'),
 
     APP_OPTS = {

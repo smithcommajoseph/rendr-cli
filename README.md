@@ -108,13 +108,6 @@ Will generate the `ACTION1`, `ACTION2`, and `ACTION3` view files in the `APPNAME
 AND templates for `ACTION1`, `ACTION2`, and `ACTION3` in the `APPNAME/app/templates/SCAFFOLDNAME` directory.  
 AND generate the `ACTION1`, `ACTION2`, and `ACTION3` controller entries in the `APPNAME/app/controllers/SCAFFOLDNAME` file.  
 
-### File Structure
-_(Coming soon)_
-
-
-### App Recipes
-_(Coming soon)_
-
 
 ## Contributing
 If you have a bug fix or feature proposal, submit a pull request with a clear description of the change, plus tests.

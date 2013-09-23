@@ -1,7 +1,7 @@
 {
   "name": "rendr-cli",
   "description": "A CLI for Rendr",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "homepage": "https://github.com/technicolorenvy/rendr-cli",
   "author": {
     "name": "Joseph (Jos) Smith",
@@ -26,7 +26,8 @@
     "node": "> 0.6.0"
   },
   "scripts": {
-    "test": "mocha --reporter spec  ./test --recursive"
+    "test": "mocha --reporter spec  ./test --recursive",
+    "coffeeMaker": "node lib/translate.js coffeescript"
   },
   "dependencies": {
     "commander": "1.2.x",
@@ -36,11 +37,12 @@
     "walk": ">= 2.2",
     "string": "1.4.x",
     "i": "0.3.x",
-    "js2coffee": "*"
+    "fs-extra": "*"
   },
   "devDependencies": {
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "js2coffee": "*"
   },
   "keywords": [
     "Backbone",

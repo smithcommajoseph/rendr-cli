@@ -36,7 +36,7 @@ module.exports = (grunt) ->
 
     watch:
       scripts:
-        files: "app/**/*.js"
+        files: "app/**/*..<% filename.suffix %>"
         tasks: ["rendr_stitch"]
         options:
           interrupt: true
@@ -89,7 +89,7 @@ module.exports = (grunt) ->
   grunt.registerTask "runNode", ->
     grunt.util.spawn
       cmd: "node"
-      args: ["./node_modules/nodemon/nodemon.js", "--debug", "index.js"]
+      args: ["./node_modules/nodemon/nodemon.js", "--debug", "index.<%= filename.suffix %>"]
       opts:
         stdio: "inherit"
     , ->

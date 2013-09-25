@@ -21,6 +21,7 @@ Assuming Node and npm are present and accounted for, install the Rendr CLI with:
 
       -h, --help                       output usage information
       -V, --version                    output the version number
+      -c, --coffee                     generators in Coffeescript
       -u, --url <url>                  Set a url (evaluated when generating a model or collection)
       -a, --api <api>                  Set an apiHost (evaluated when generating a model or collection)
       -i, --idAttribute <idAttribute>  Set an idAttribute (evaluated when generating a model)

@@ -2,14 +2,14 @@
   "name": "<%= appName.dasherized %>",
   "version": "0.1.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.<%= filename.suffix %>",
   "scripts": {
     "test": "mocha --ui bdd --reporter spec  ./test --recursive",
-    "start": "DEBUG=app:* node app.js"
+    "start": "DEBUG=app:* node index.js"
   },
   "repository": {
     "type": "git",
-    "url": " "
+    "url": "git://github.com/airbnb/rendr-app-template.git"
   },
   "dependencies": {
     "express": "~>3",
@@ -17,7 +17,7 @@
     "async": "~0.1.22",
     "request": "~2.16",
     "rendr-handlebars": "0.0.5",
-    "rendr": "0.5.0-alpha01",
+    "rendr": "0.5.0-alpha04",
     "debug": "*",
     "config": "0.4.x",
     "js-yaml": "2.x.x"
@@ -28,7 +28,6 @@
     "grunt-contrib-handlebars": "git://github.com/spikebrehm/grunt-contrib-handlebars#a4ae75750efeb23bf8ca9c61d9cf7569d40879fa",
     "grunt-rendr-stitch": "~0.0.6",
     "grunt-contrib-watch": "~0.3.1",
-    "grunt-bg-shell": "~2.0.1",
     "nodemon": "~0.7.6",
     "mocha": "~1.9.0",
     "should": "~1.2.2"

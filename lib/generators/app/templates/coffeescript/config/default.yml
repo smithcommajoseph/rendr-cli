@@ -1,6 +1,10 @@
-App:
-  host: localhost
+# Default config
+
+app:
   port: 3030
+
+rendrApp:
+  someProperty: someValue
 
 assets:
   minify: false
@@ -11,5 +15,8 @@ assets:
 
 api:
   default: 
-    host: localhost:3030
-    protocol: http
+    host: api.github.com
+    protocol: https
+  travis-ci:
+    host: api.travis-ci.org
+    protocol: https

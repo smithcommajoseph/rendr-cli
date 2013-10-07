@@ -1,64 +1,89 @@
 
 ###
-Initialize Express middleware stack.
-###
-initMiddleware = ->
-  app.use express.compress()
-  app.use express.static(__dirname + "/public")
-  app.use express.logger()
-  app.use express.bodyParser()
-  
-  ###
-  Rendr routes are attached with `app.get()`, which adds them to the
-  `app.router` middleware.
-  ###
-  app.use app.router
-  
-  ###
-  Error handler goes last.
-  ###
-  app.use mw.errorHandler()
-
-###
 Initialize our Rendr server.
 
 We can pass inject various modules and options here to override
-default behavior:
+default behavior, i.e.:
 - dataAdapter
 - errorHandler
-- notFoundHandler
 - appData
 ###
-initServer = ->
-  options =
-    dataAdapter: new DataAdapter(config.api)
-    errorHandler: mw.errorHandler()
-    appData: config.rendrApp
 
-  server = rendr.createServer(app, options)
+###
+Initialize Express middleware stack.
+###
+
+###
+To mount Rendr, which owns its own Express instance for better encapsulation,
+simply add `server` as a middleware onto your Express app.
+This will add all of the routes defined in your `app/routes.js`.
+If you want to mount your Rendr app onto a path, you can do something like:
+
+app.use('/my_cool_app', server);
+###
+
+###
+If you want to add custom middleware to Rendr's Express app, use `server.configure()`.
+The only argument will be Rendr's internal Express instance, to which you can add middleware
+or otherwise modify. You might want to do this to add middleware that needs to access
+`req.rendrApp`, for example for fetching some data that you want to be available both
+on the client & the server.
+
+It would look something like this:
+
+server.configure(function(rendrExpressApp) {
+rendrExpressApp.use(function(req, res, next) {
+someLibrary.fetchSomethingAsynchronously(function(err, result) {
+if (err) return next(err);
+req.rendrApp.set('someProperty', result);
+next();
+});
+});
+});
+
+Then, in a model or view, you could access 'someProperty' from the `app`:
+
+// app/views/some_view.js
+module.exports = BaseView.extend({
+...
+
+// Let's extend the `getTemplateData` method to pass some value to our template
+// that is dependent upon the `app`.
+getTemplateData: function() {
+var data = BaseView.prototype.getTemplateData.call(this);
+data.someProperty = this.app.get('someProperty');
+return data;
+}
+});
+###
 
 ###
 Start the Express server.
 ###
 start = ->
-  port = process.env.PORT or config.App.port
+  port = process.env.PORT or config.app.port
   app.listen port
   console.log "server pid %s listening on port %s in %s mode", process.pid, port, app.settings.env
 express = require("express")
 rendr = require("rendr")
 config = require("config")
-mw = require("./server/middleware")
 DataAdapter = require("./server/lib/data_adapter")
-app = undefined
-server = undefined
 app = express()
-
+server = rendr.createServer(
+  dataAdapter: new DataAdapter(config.api)
+  appData: config.rendrApp
+)
+app.use express.compress()
+app.use express.static(__dirname + "/public")
+app.use express.logger()
+app.use express.bodyParser()
+app.use server
+server.configure (rendrExpressApp) ->
+  rendrExpressApp.set "view engine", "coffee"
+  
 ###
-Here we actually initialize everything and start the Express server.
-
-We have to add the middleware before we initialize the server, otherwise
-the 404 handler gets too greedy, and intercepts i.e. static assets.
+Only start server if this script is executed, not if it's require()'d.
+This makes it easier to run integration tests on ephemeral ports.
 ###
-initMiddleware()
-initServer()
-start()
+start()  if require.main is module
+exports.app = app

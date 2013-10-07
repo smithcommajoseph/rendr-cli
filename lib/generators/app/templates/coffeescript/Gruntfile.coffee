@@ -36,7 +36,7 @@ module.exports = (grunt) ->
 
     watch:
       scripts:
-        files: "app/**/*..<% filename.suffix %>"
+        files: "app/**/*.<%= filename.suffix %>"
         tasks: ["rendr_stitch"]
         options:
           interrupt: true

@@ -3,8 +3,6 @@
 
 The goal of Rendr CLI is to provide the ablility to generate [Rendr](https://github.com/airbnb/rendr) apps and app components quickly and efficiently.
 
-This project is in an early alpha stage.
-
 
 ## Getting Started
 
